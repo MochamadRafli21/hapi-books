@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-const {nanoid} = require('nanoid');
+const nanoid = require('nanoid');
 const books = require('./books');
 
 const addBooksHandler = (request, h) =>{

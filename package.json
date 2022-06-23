@@ -7,7 +7,6 @@
     "start": "nodemon ./src/server.js",
     "lint": "eslint ./"
   },
-  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MochamadRafli21/hapi-books.git"
@@ -19,13 +18,11 @@
     "url": "https://github.com/MochamadRafli21/hapi-books/issues"
   },
   "homepage": "https://github.com/MochamadRafli21/hapi-books#readme",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "@hapi/hapi": "^20.2.2",
+    "eslint": "^8.18.0",
     "nanoid": "^4.0.0",
     "nodemon": "^2.0.18"
-  },
-  "devDependencies": {
-    "eslint": "^8.18.0",
-    "eslint-config-google": "^0.14.0"
   }
 }
