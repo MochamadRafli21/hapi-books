@@ -72,12 +72,44 @@ const addBooksHandler = (request,h) =>{
       return response;
 }
 
-const getAllBooks = () => ({
-    status: 'success',
-    data: {
-      "books": books,
-    },
-})
+// const getAllBooks = () => ({
+//     status: 'success',
+//     data: {
+//       "buku": books,
+//     },
+// })
+
+const getAllBooks =(request, h) => {
+    const { name, reading, finished } = request.query;
+    
+    let book = books
+    if(name !== undefined){
+        book = books.filter((b) => b.name === name);
+    }
+    if(reading !== undefined){
+        const value = reading === 1 ? true:false; 
+        book = books.filter((b) => b.reading == value);
+    }
+    if(finished !== undefined){
+        const value = finished === 1 ? true:false; 
+        book = books.filter((b) => b.reading == value);
+    }
+ 
+    if (book !== undefined) {
+        return {
+          status: 'success',
+          data: {
+            "buku": book
+          },
+        };
+      }
+      const response = h.response({
+        status: 'fail',
+        message: 'Buku tidak ditemukan',
+      });
+      response.code(404);
+      return response;
+}
 
 const getBooksById = (request, h) => {
     const { id } = request.params;
