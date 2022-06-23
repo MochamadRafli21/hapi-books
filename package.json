@@ -1,0 +1,29 @@
+{
+  "name": "hapi-books",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./server.js",
+    "lint": "eslint ./"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MochamadRafli21/hapi-books.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MochamadRafli21/hapi-books/issues"
+  },
+  "homepage": "https://github.com/MochamadRafli21/hapi-books#readme",
+  "dependencies": {
+    "@hapi/hapi": "^20.2.2",
+    "nodemon": "^2.0.18"
+  },
+  "devDependencies": {
+    "eslint": "^8.18.0"
+  }
+}
