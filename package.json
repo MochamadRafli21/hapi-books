@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./src/server.js",
+    "app": "node ./src/server.js",
     "lint": "eslint ./"
   },
   "repository": {
@@ -18,11 +18,12 @@
     "url": "https://github.com/MochamadRafli21/hapi-books/issues"
   },
   "homepage": "https://github.com/MochamadRafli21/hapi-books#readme",
-  "dependencies": {},
   "devDependencies": {
     "@hapi/hapi": "^20.2.2",
     "eslint": "^8.18.0",
-    "nanoid": "^4.0.0",
     "nodemon": "^2.0.18"
+  },
+  "dependencies": {
+    "uuid": "^8.3.2"
   }
 }

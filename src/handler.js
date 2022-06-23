@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-const nanoid = require('nanoid');
+const { v4: uuidv4 } = require('uuid');
 const books = require('./books');
 
 const addBooksHandler = (request, h) =>{
@@ -17,7 +17,7 @@ const addBooksHandler = (request, h) =>{
   const finished = pageCount === readPage ? true : false;
   const insertedAt = new Date().toISOString();
   const updatedAt = insertedAt;
-  const id = nanoid(8);
+  const id = uuidv4();
 
   const newBooks = {
     id,
@@ -40,7 +40,7 @@ const addBooksHandler = (request, h) =>{
   }
   if (readPage > pageCount) {
     // eslint-disable-next-line max-len
-    err += 'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount,\n';
+    err += 'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount';
   }
 
   if (err) {
@@ -75,13 +75,6 @@ const addBooksHandler = (request, h) =>{
   return response;
 };
 
-// const getAllBooks = () => ({
-//     status: 'success',
-//     data: {
-//       "buku": books,
-//     },
-// })
-
 const getAllBooks =(request, h) => {
   const {name, reading, finished} = request.query;
 
@@ -102,7 +95,7 @@ const getAllBooks =(request, h) => {
     return {
       status: 'success',
       data: {
-        'buku': book,
+        books: book,
       },
     };
   }
@@ -123,7 +116,7 @@ const getBooksById = (request, h) => {
     return {
       status: 'success',
       data: {
-        'buku': book,
+        book: book,
       },
     };
   }
@@ -149,20 +142,21 @@ const updateBookById = (request, h) => {
     reading,
   } = request.payload;
 
-  const finished = pageCount === readPage ? true : false;
+  const finished = pageCount === readPage;
   const updatedAt = new Date().toISOString();
 
   let err = '';
+  const index = books.findIndex((book) => book.id === id);
 
   if (!name) {
-    err += 'Gagal memperbarui buku. Mohon isi nama buku\n';
+    err += 'Gagal memperbarui buku. Mohon isi nama buku';
   }
 
   if (readPage > pageCount) {
-    err += 'Gagal memperbarui buku. readPage tidak boleh lebih besar dari pageCount,\n';
+    err += 'Gagal memperbarui buku. readPage tidak boleh lebih besar dari pageCount';
   }
 
-  if (err !== undefined) {
+  if (err !== '') {
     const response = h.response({
       status: 'fail',
       message: err,
@@ -170,9 +164,6 @@ const updateBookById = (request, h) => {
     response.code(400);
     return response;
   }
-
-
-  const index = books.findIndex((book) => book.id === id);
 
   if ( index !== -1 ) {
     books[index] = {
@@ -195,14 +186,14 @@ const updateBookById = (request, h) => {
     });
     response.code(200);
     return response;
+  }else{
+    const response = h.response({
+      status: 'fail',
+      message: 'Gagal memperbarui buku. Id tidak ditemukan',
+    });
+    response.code(404);
+    return response;
   }
-
-  const response = h.response({
-    status: 'fail',
-    message: 'Gagal memperbarui buku. Id tidak ditemukan',
-  });
-  response.code(404);
-  return response;
 };
 
 const deleteBookById = (request, h) =>{
