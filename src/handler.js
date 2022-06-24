@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-const { v4: uuidv4 } = require('uuid');
+const {v4: uuidv4} = require('uuid');
 const books = require('./books');
 
 const addBooksHandler = (request, h) =>{
@@ -79,7 +79,9 @@ const getAllBooks =(request, h) => {
   const {name, reading, finished} = request.query;
   let book = books;
   if (name !== undefined) {
-    book = book.filter((b) => { return b.name.toUpperCase().includes(name.toUpperCase()); });
+    book = book.filter((b) => {
+      return b.name.toUpperCase().includes(name.toUpperCase());
+    });
   }
 
   if (reading !== undefined) {
@@ -97,14 +99,14 @@ const getAllBooks =(request, h) => {
   }
 
   if (book !== undefined) {
-    book = book.map(book => {
+    book = book.map((book) => {
       const container = {};
       container.id = book.id;
       container.name = book.name;
       container.publisher = book.publisher;
 
-      return container
-    })
+      return container;
+    });
     return {
       status: 'success',
       data: {
@@ -199,7 +201,7 @@ const updateBookById = (request, h) => {
     });
     response.code(200);
     return response;
-  }else{
+  } else {
     const response = h.response({
       status: 'fail',
       message: 'Gagal memperbarui buku. Id tidak ditemukan',

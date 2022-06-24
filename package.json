@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "app": "node ./src/server.js",
+    "start": "node ./src/server.js",
     "lint": "eslint ./"
   },
   "repository": {
@@ -21,6 +21,7 @@
   "devDependencies": {
     "@hapi/hapi": "^20.2.2",
     "eslint": "^8.18.0",
+    "eslint-config-google": "^0.14.0",
     "nodemon": "^2.0.18"
   },
   "dependencies": {
